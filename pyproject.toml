@@ -1,0 +1,16 @@
+[project]
+name = "comfyui-motion-transfer-director"
+version = "0.1.0"
+description = "Motion transfer and character replacement director for MiniMax H3 in ComfyUI."
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/xiantuhenlan/ComfyUI-Motion-Transfer-Director"
+"Bug Tracker" = "https://github.com/xiantuhenlan/ComfyUI-Motion-Transfer-Director/issues"
+
+[tool.comfy]
+PublisherId = "xiantuhenlan"
+DisplayName = "ComfyUI-Motion-Transfer-Director"

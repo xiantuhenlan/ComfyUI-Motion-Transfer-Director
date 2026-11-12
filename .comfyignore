@@ -1,0 +1,13 @@
+.git/
+.github/
+.env
+.env.*
+.coordination/
+__pycache__/
+*.py[cod]
+*.log
+*.zip
+runtime/
+third_party/
+workflows/
+publish_action.example.yml
