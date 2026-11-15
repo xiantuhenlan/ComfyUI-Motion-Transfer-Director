@@ -1,12 +1,13 @@
 import {app} from '../../scripts/app.js';
 import {api} from '../../scripts/api.js';
 import {openMotionDirector} from './motion_director_ui.js';
+import {createMotionId} from './motion_director_core.js';
 async function uploadAsset(asset,signal){
     signal?.throwIfAborted();
     if(asset.inputPath)return asset.inputPath;
     if(!asset.file)throw new Error('请重新选择本分镜的素材文件');
     const form=new FormData();
-    form.append('image',asset.file,`${crypto.randomUUID()}_${asset.file.name}`);
+    form.append('image',asset.file,`${createMotionId()}_${asset.file.name}`);
     form.append('type','input');form.append('subfolder','xiantu_motion_director');form.append('overwrite','false');
     const response=await api.fetchApi('/upload/image',{method:'POST',body:form,signal});
     if(!response.ok)throw new Error(`素材提交失败：${response.status}`);

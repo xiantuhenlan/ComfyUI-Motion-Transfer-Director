@@ -1,6 +1,6 @@
 [project]
 name = "comfyui-motion-transfer-director"
-version = "0.1.0"
+version = "0.1.1"
 description = "Motion transfer and character replacement director for MiniMax H3 in ComfyUI."
 readme = "README.md"
 license = { file = "LICENSE" }

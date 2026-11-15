@@ -1,4 +1,12 @@
-export function createShot(index=1){return {id:crypto.randomUUID(),name:`分镜 ${String(index).padStart(2,'0')}`,mode:'motion',prompt:'',video:null,character:null,results:[],inPoint:0,outPoint:null};}
+export function createMotionId(){
+    if(typeof crypto.randomUUID==='function')return crypto.randomUUID();
+    const bytes=crypto.getRandomValues(new Uint8Array(16));
+    bytes[6]=(bytes[6]&0x0f)|0x40;
+    bytes[8]=(bytes[8]&0x3f)|0x80;
+    const hex=Array.from(bytes,byte=>byte.toString(16).padStart(2,'0')).join('');
+    return [hex.slice(0,8),hex.slice(8,12),hex.slice(12,16),hex.slice(16,20),hex.slice(20)].join('-');
+}
+export function createShot(index=1){return {id:createMotionId(),name:`分镜 ${String(index).padStart(2,'0')}`,mode:'motion',prompt:'',video:null,character:null,results:[],inPoint:0,outPoint:null};}
 export function createProject(){const shot=createShot();return {shots:[shot],activeShotId:shot.id,playhead:0};}
 export function activeShot(project){return project.shots.find(s=>s.id===project.activeShotId);}
 export function addShot(project){const allSelected=project.shots.length>0&&selectedShotIds(project).length===project.shots.length,shot=createShot(project.shots.length+1);project.shots.push(shot);if(allSelected)setShotSelected(project,shot.id,true);project.activeShotId=shot.id;return shot;}
@@ -71,6 +79,6 @@ export function planDirectorRun(project,scope='sequence'){
         else if(!bounds||!shot.character)reason='请选择视频、有效分镜范围和角色参考图';
         else if(missingPicture)reason='请添加提示词引用的参考图 '+missingPicture[1];
         if(reason){const error=new Error(`${shot.name}：${reason}`);error.shotId=shot.id;error.focusPrompt=!String(shot.prompt||'').trim();throw error;}
-        return {...shot,...settings,shotIndex:project.shots.indexOf(shot)+1,runToken:crypto.randomUUID(),video:{...shot.video},character:{...shot.character},additionalCharacters:(shot.additionalCharacters||[]).map(asset=>({...asset})),inPoint:bounds.start,outPoint:bounds.end};
+        return {...shot,...settings,shotIndex:project.shots.indexOf(shot)+1,runToken:createMotionId(),video:{...shot.video},character:{...shot.character},additionalCharacters:(shot.additionalCharacters||[]).map(asset=>({...asset})),inPoint:bounds.start,outPoint:bounds.end};
     });
 }
