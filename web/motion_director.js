@@ -132,14 +132,14 @@ app.registerExtension({name:'ComfyUI.MotionTransferDirector',setup(){
                 const prepare=async(asset,label)=>{let path=asset.inputPath;if(!path){let pending=session.uploads.get(asset.file);if(!pending){pending=uploadAsset(asset,signal).catch(error=>{session.uploads.delete(asset.file);throw error;});session.uploads.set(asset.file,pending);}path=await pending;}signal?.throwIfAborted();report({phase:'检查／上传分镜素材',detail:`${label}已就绪`,value:++ready,max:total});return path;};
                 const [video,character,...additionalCharacters]=await Promise.all([prepare(shot.video,'参考视频'),prepare(shot.character,'参考图 1'),...extra.map((asset,index)=>prepare(asset,'参考图 '+(index+2)))]);
                 signal?.throwIfAborted();
-                const data={version:1,id:shot.id,runToken:shot.runToken,name:shot.name,shotIndex:shot.shotIndex,filenamePrefix:shot.filenamePrefix,mode:shot.mode,prompt:shot.prompt,originalPrompt:shot.prompt,
+                const data={version:1,id:shot.id,runToken:shot.runToken,name:shot.name,shotIndex:shot.shotIndex,filenamePrefix:shot.filenamePrefix,mode:shot.mode,prompt:shot.prompt,originalPrompt:shot.prompt, 
                     video,character,...(additionalCharacters.length?{additionalCharacters}:{}),inPoint:shot.inPoint,outPoint:shot.outPoint,
                     duration:shot.video.duration,width:shot.video.width,height:shot.video.height,
                     generationWidth:shot.generationWidth,generationHeight:shot.generationHeight,generationAspect:shot.generationAspect,generationMegapixels:shot.generationMegapixels,refImageSize:shot.refImageSize,
                     referenceVideoMode:shot.referenceVideoMode||'original',referenceVideoWidth:shot.referenceVideoWidth,referenceVideoHeight:shot.referenceVideoHeight};
                 if(!snapshot)throw new Error('节点缺少 shot_json，请更新并重启 ComfyUI');
                 let stored={};try{stored=JSON.parse(snapshot.value||'{}');}catch{}snapshot.value=JSON.stringify({...data,projectState:stored.projectState});this.setDirtyCanvas?.(true,true);if(session.project)await saveProject(session.project);
-
+            
             },onRun:async(shot,report,control)=>runDirector(this,report,control),
             onLibraryRequest:async(path,options={})=>{const r=await api.fetchApi('/xiantu/video-editor/common-assets'+path,options);const data=await r.json();if(!r.ok)throw new Error(data.error||'资产库操作失败');return data;},
             libraryAssetUrl:asset=>api.apiURL('/xiantu/video-editor/common-assets/content?'+new URLSearchParams({id:asset.id,v:asset.updatedAt||''})),

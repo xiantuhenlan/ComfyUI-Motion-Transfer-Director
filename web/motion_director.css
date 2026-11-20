@@ -187,3 +187,6 @@ body:has(.xmt) .xta-toolbar-status{display:none!important}
 .xmt .mt-image-clip .mt-result-thumbnail{position:relative;display:grid;place-items:center;flex:0 0 56px;width:56px;height:42px;overflow:hidden;border-radius:2px;background:#07151d}
 .xmt .mt-result-thumbnail img{position:absolute;inset:0;opacity:.65}
 .xmt .mt-result-thumbnail i{z-index:1;display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#08151dcc;color:#e2f5fb;font-size:11px;font-style:normal}
+
+/* Keep preview layers inside the workspace, clear of the sibling timeline. */
+.xmt .mt-workspace{isolation:isolate}
