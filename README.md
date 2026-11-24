@@ -24,3 +24,5 @@
 - 下方的声音和视频开关只影响预览。
 
 版本记录见 [CHANGELOG.md](CHANGELOG.md)。项目维护者可用根目录的 `publish_action.example.yml` 配置 GitHub Actions，或使用 Comfy CLI 发布 Registry 新版本。
+
+当前发布版本：`0.1.3`。完整仓库与更新清单地址见 `plugin_manifest.json`。

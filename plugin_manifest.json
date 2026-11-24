@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "pluginId": "comfyui-motion-transfer-director",
   "displayName": "ComfyUI-Motion-Transfer-Director（闲兔动作迁移角色替换导演台）",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "channel": "stable",
   "repository": "https://github.com/xiantuhenlan/ComfyUI-Motion-Transfer-Director",
   "updateManifestUrl": "https://raw.githubusercontent.com/xiantuhenlan/ComfyUI-Motion-Transfer-Director/main/plugin_manifest.json"

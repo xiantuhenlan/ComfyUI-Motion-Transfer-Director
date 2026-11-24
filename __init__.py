@@ -6,7 +6,7 @@ from .video_output import XiantuMotionDirectorSaveVideo
 
 register_cleanup_routes()
 
-__version__ = "0.1.2"
+__version__ = "0.1.3"
 WEB_DIRECTORY = "./web"
 
 
